@@ -21,3 +21,12 @@
 | 比较   | 生成代理的逻辑简单，执行效率相对较低，每一次都要反射动态调用 | 生成代理逻辑更复杂，效率，调用效率更高，生成一个包含了所有逻辑的FastClass，底层没有用到反射 |
 |        |                                                              |                                                              |
 
+## Spring 中的代理选择原则
+
+1. 当 Bean 有实现接口时， Spring 就会用JDK的动态代理。
+2. 当 Bean 没有实现接口时， Spring 选择CGLib。
+3. Spring 可以通过配置强制使用 CGLib ，只需在 Spring 的配置文件中加入如下代码：
+
+```xml
+<aop:aspectj-autoproxy proxy-target-class="true"/>
+```
